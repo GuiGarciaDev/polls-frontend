@@ -13,4 +13,5 @@ export interface Polls {
   export interface Option {
     id: string
     title: string
+    score: number
   }

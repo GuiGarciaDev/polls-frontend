@@ -65,6 +65,15 @@ export default function VoteCard({ poll }: VoteCardProps) {
     }
   }
 
+  function getPollTotalVote() {
+    let votes = 0
+    poll.options.map((option) => {
+      votes += option.score
+    })
+
+    return votes
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card key={poll.id}>
@@ -78,8 +87,9 @@ export default function VoteCard({ poll }: VoteCardProps) {
                 return (
                   <RatingBar
                     title={option.title}
-                    percentage={(Math.random() * 100).toFixed(2)}
+                    percentage={(option.score / getPollTotalVote()) * 100}
                     selected={getValues("values") === option.id}
+                    key={option.id}
                   />
                 )
               })}
@@ -101,18 +111,24 @@ export default function VoteCard({ poll }: VoteCardProps) {
               })}
             </RadioGroup>
           )}
+          <span className="text-destructive text-sm">
+            {errors.values?.message}
+          </span>
         </CardContent>
-        <CardFooter className="flex justify-end space-x-3">
-          <Button
-            variant={"outline"}
-            onClick={() => {
-              reset()
-              setVoted(false)
-            }}
-          >
-            Change vote
-          </Button>
-          <Button type="submit">Vote</Button>
+        <CardFooter className="flex justify-between">
+          <span>{`${getPollTotalVote()} Votos`}</span>
+          <div className="space-x-3">
+            <Button
+              variant={"outline"}
+              onClick={() => {
+                reset()
+                setVoted(false)
+              }}
+            >
+              Change vote
+            </Button>
+            <Button type="submit">Vote</Button>
+          </div>
         </CardFooter>
       </Card>
     </form>

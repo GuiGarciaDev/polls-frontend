@@ -1,6 +1,6 @@
 interface RatingBarProps {
   title: string
-  percentage: number | string
+  percentage: number
   selected: boolean
 }
 
@@ -32,7 +32,7 @@ export default function RatingBar({
           </div>
         </div>
         <span className="text-sm font-medium text-[#100303]">
-          {`${percentage}%`}
+          {`${percentage.toFixed(2)}%`}
         </span>
       </div>
     </div>
