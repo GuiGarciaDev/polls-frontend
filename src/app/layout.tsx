@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryNextClientProvider>
           <div className="flex justify-center h-screen">
-            <div className="flex max-w-screen-2xl grow p-6">{children}</div>
+            <div className="flex max-w-screen-2xl grow">{children}</div>
           </div>
           <Toaster />
         </QueryNextClientProvider>
