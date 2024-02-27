@@ -1,10 +1,11 @@
 "use client"
 import VoteCard from "@/components/VoteCard"
 import { queryClient } from "@/context/queryClientProvider"
-import { Poll } from "@/types/poll"
+import { Option, Poll } from "@/types/poll"
+import { pollUrl } from "@/types/zod"
 import axios from "axios"
 import { useParams } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 import { z } from "zod"
 
@@ -17,6 +18,12 @@ export default function Page() {
 
   const { id } = getParams.parse(param)
 
+  // const [pollCache, setPollCache] = useState<Poll>(
+  //   queryClient.getQueriesData<Poll>(["poll"])[0][1]
+  // )
+
+  //console.log(queryClient.getQueryData<Poll>(["poll"]))
+
   const { data, isSuccess } = useQuery({
     queryKey: ["poll"],
     queryFn: (): Promise<{ poll: Poll }> => {
@@ -26,20 +33,28 @@ export default function Page() {
     },
   })
 
-  // TODO: add websocket to realtime connection, maybe inside vote card
-
   useEffect(() => {
-    const socket = new WebSocket(
-      "ws://localhost:3333/polls/b903b361-ce6b-4214-b921-186a652c0290/results"
-    )
+    const socket = new WebSocket(`ws://localhost:3333/polls/${id}/results`)
 
     // Listen to messages from the server
     socket.addEventListener(
       "message",
-      function (event: MessageEvent<WebsocketPollResponse>) {
-        console.log("Message from server:", event.data)
+      async function (event: MessageEvent<WebsocketPollResponse>) {
+        // if (isSuccess) {
+        //   let newPollCache = data.poll // Initializing new instance of poll to mutate and update cache
+        //   let mutatedOptions = newPollCache.options
 
-        queryClient.invalidateQueries("poll")
+        //   for (let i = 0; i < mutatedOptions.length; i++) {
+        //     if (mutatedOptions[i].id === event.data.pollOptionId) {
+        //       mutatedOptions[i].score = event.data.votes
+        //     }
+        //   }
+
+        //   queryClient.setQueryData<Poll>(["poll"], newPollCache)
+        //   //setPollCache(queryClient.getQueryData<Poll>("poll")[0][1])
+        // }
+
+        queryClient.refetchQueries(["poll"]) // Add a more efficient way to manipulate cache and prevent unecessary refetchs
       }
     )
 

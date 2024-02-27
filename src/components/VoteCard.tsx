@@ -19,6 +19,7 @@ import RatingBar from "./rating-bar"
 import { toast } from "sonner"
 import { api } from "@/lib/axios"
 import { AxiosError } from "axios"
+import { queryClient } from "@/context/queryClientProvider"
 
 interface VoteCardProps {
   poll: Poll
@@ -32,10 +33,6 @@ export default function VoteCard({ poll }: VoteCardProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<z.infer<typeof VoteSchema>>({
-    defaultValues: {
-      values: "",
-    },
-    mode: "onChange",
     resolver: zodResolver(VoteSchema),
   })
 
@@ -46,7 +43,10 @@ export default function VoteCard({ poll }: VoteCardProps) {
       .post(`http://localhost:3333/polls/${poll.id}/votes`, {
         pollOptionId: getValues("values"),
       })
-      .then((res) => res.data)
+      .then(async (res) => {
+        await queryClient.refetchQueries({ queryKey: ["poll"] })
+        return res.data
+      })
   }
 
   async function onSubmit() {
@@ -74,6 +74,14 @@ export default function VoteCard({ poll }: VoteCardProps) {
     return votes
   }
 
+  function getSafePercentage(score: number, total: number) {
+    if (score && total) {
+      return (score / total) * 100
+    }
+
+    return 0
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card key={poll.id}>
@@ -87,7 +95,10 @@ export default function VoteCard({ poll }: VoteCardProps) {
                 return (
                   <RatingBar
                     title={option.title}
-                    percentage={(option.score / getPollTotalVote()) * 100}
+                    percentage={getSafePercentage(
+                      option.score,
+                      getPollTotalVote()
+                    )}
                     selected={getValues("values") === option.id}
                     key={option.id}
                   />

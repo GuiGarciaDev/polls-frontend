@@ -81,7 +81,6 @@ export default function DynamicForm({
     if (data.success) {
       if (changeState) {
         changeState({ success: true, pollId: data.pollId })
-        console.log("rodou")
       }
       toast("Enquete criada com sucesso!")
     }

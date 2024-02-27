@@ -19,16 +19,16 @@ export default function RatingBar({
   return (
     <div className="flex flex-col">
       <div className="flex gap-4">
-        <div className="w-full h-auto white rounde">
+        <div className="w-full h-auto white rounded">
           <div
-            className={`h-auto px-4 rounded ${
+            className={`h-auto rounded ${
               selected
                 ? "bg-[#43D8C9] text-[#100303]"
                 : "bg-secondary text-[#100303]"
             }`}
             style={{ width: `${percentage}%` }}
           >
-            {title}
+            <span className="ml-4">{title}</span>
           </div>
         </div>
         <span className="text-sm font-medium text-[#100303]">
