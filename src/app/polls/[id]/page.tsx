@@ -1,11 +1,10 @@
 "use client"
 import VoteCard from "@/components/VoteCard"
 import { queryClient } from "@/context/queryClientProvider"
-import { Option, Poll } from "@/types/poll"
-import { pollUrl } from "@/types/zod"
+import { Poll } from "@/types/poll"
 import axios from "axios"
 import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useQuery } from "react-query"
 import { z } from "zod"
 

@@ -39,21 +39,21 @@ export default function InputButton({
       <div className="webflow-style-input relative flex flex-row max-w-400 mx-auto h-full rounded-md px-3 bg-transparent">
         <input
           type="text"
-          className="flex-grow text-[#BFD2FF] text-base leading-7 placeholder-[#7881A1] placeholder-opacity-100 bg-transparent focus:outline-none"
+          className="flex-grow text-base leading-7 bg-transparent focus:outline-none"
           placeholder={placeholder}
           onChange={(e) => {
             setInputUrl(e.target.value)
           }}
         />
         <button
-          className="flex items-center text-[#7881A1] text-base transition-colors duration-250 hover:text-[#BFD2FF] mb-[3px]"
+          className="flex items-center text-base transition-colors duration-250 hover:text-primary mb-[3px]"
           onClick={() => {
             validateUrl(inputUrl)
           }}
         >
           {rightIcon}
         </button>
-        <div className="absolute left-0 right-0 bottom-0 z-10 h-[3px] bg-gradient-to-r from-purple-400 via-teal-400 to-yellow-200 bg-cover animate-gradient"></div>
+        <div className="absolute left-0 right-0 bottom-0 z-10 h-[3px] bg-primary"></div>
       </div>
     </div>
   )

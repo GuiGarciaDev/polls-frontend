@@ -4,13 +4,6 @@ interface RatingBarProps {
   selected: boolean
 }
 
-const colorPallete = {
-  one: "#F7F7F7",
-  two: "#43D8C9",
-  three: "#95389E",
-  four: "#100303",
-}
-
 export default function RatingBar({
   title,
   percentage,
@@ -22,16 +15,20 @@ export default function RatingBar({
         <div className="w-full h-auto white rounded">
           <div
             className={`h-auto rounded ${
-              selected
-                ? "bg-[#43D8C9] text-[#100303]"
-                : "bg-secondary text-[#100303]"
+              selected ? "bg-primary" : "bg-secondary"
             }`}
             style={{ width: `${percentage}%` }}
           >
-            <span className="ml-4">{title}</span>
+            <span
+              className={`ml-4  ${
+                selected ? "text-[#F9FAFB]" : "text-card-foreground"
+              }`}
+            >
+              {title}
+            </span>
           </div>
         </div>
-        <span className="text-sm font-medium text-[#100303]">
+        <span className="text-sm font-medium">
           {`${percentage.toFixed(2)}%`}
         </span>
       </div>

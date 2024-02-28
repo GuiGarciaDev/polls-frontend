@@ -126,7 +126,7 @@ export default function VoteCard({ poll }: VoteCardProps) {
             {errors.values?.message}
           </span>
         </CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex justify-between space-x-10">
           <span>{`${getPollTotalVote()} Votos`}</span>
           <div className="space-x-3">
             <Button

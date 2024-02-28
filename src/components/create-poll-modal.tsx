@@ -41,9 +41,7 @@ export default function CreatePollModal() {
   return (
     <Dialog onOpenChange={(e) => !e && resetPollResponse()}>
       <DialogTrigger asChild>
-        <Button className="bg-accentColor" variant={"default"}>
-          Criar enquete
-        </Button>
+        <Button variant={"default"}>Criar enquete</Button>
       </DialogTrigger>
 
       {!pollResponse.success ? (

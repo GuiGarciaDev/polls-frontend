@@ -19,12 +19,16 @@ const config = {
     },
     extend: {
       colors: {
+        rating_bar: {
+          light: "#d5d6d7",
+          dark: "#334156",
+          selected: "#8A2BE2" 
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        accentColor: "#8A2BE2",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
