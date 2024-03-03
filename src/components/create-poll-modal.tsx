@@ -17,14 +17,13 @@ import { Input } from "./ui/input"
 import DynamicForm from "./dynamic-form"
 import { copyToClickboard } from "@/lib/copy-clipboard"
 import { toast } from "sonner"
+import { POLLS_BASE_URL } from "@/lib/axios"
 
 export default function CreatePollModal() {
   const [pollResponse, setPollResponse] = useState<CreatePollResponse>({
     success: false,
     pollId: "",
   })
-
-  const POLLS_BASE_URL = "http://localhost:3000/polls/" // mocked value
 
   function resetPollResponse() {
     setPollResponse({
@@ -41,7 +40,9 @@ export default function CreatePollModal() {
   return (
     <Dialog onOpenChange={(e) => !e && resetPollResponse()}>
       <DialogTrigger asChild>
-        <Button variant={"default"}>Criar enquete</Button>
+        <Button variant={"default"} className="w-full xsm:w-fit h-[44px]">
+          Criar enquete
+        </Button>
       </DialogTrigger>
 
       {!pollResponse.success ? (

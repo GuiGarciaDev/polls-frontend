@@ -29,14 +29,8 @@ export default function InputButton({
   }
 
   return (
-    <div className="flex flex-col h-11">
-      {/* <style>
-        @keyframes gradient { 
-            0%{background-position:0 0}
-            100%{background-position:100% 0}
-        }
-    </style> */}
-      <div className="webflow-style-input relative flex flex-row max-w-400 mx-auto h-full rounded-md px-3 bg-transparent">
+    <div className="flex flex-col h-11 w-full xsm:w-fit">
+      <div className="webflow-style-input w-full xsm:w-fit relative flex flex-row max-w-400 mx-auto h-full rounded-md px-3 bg-transparent">
         <input
           type="text"
           className="flex-grow text-base leading-7 bg-transparent focus:outline-none"

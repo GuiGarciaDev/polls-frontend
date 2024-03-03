@@ -1,6 +1,7 @@
 "use client"
 import VoteCard from "@/components/VoteCard"
 import { queryClient } from "@/context/queryClientProvider"
+import { POLLS_BASE_URL, WEBSOCKET_BASE_URL } from "@/lib/axios"
 import { Poll } from "@/types/poll"
 import axios from "axios"
 import { useParams } from "next/navigation"
@@ -26,14 +27,12 @@ export default function Page() {
   const { data, isSuccess } = useQuery({
     queryKey: ["poll"],
     queryFn: (): Promise<{ poll: Poll }> => {
-      return axios
-        .get(`http://localhost:3333/polls/${id}`)
-        .then((res) => res.data)
+      return axios.get(`${POLLS_BASE_URL}/polls/${id}`).then((res) => res.data)
     },
   })
 
   useEffect(() => {
-    const socket = new WebSocket(`ws://localhost:3333/polls/${id}/results`)
+    const socket = new WebSocket(`${WEBSOCKET_BASE_URL}/polls/${id}/results`)
 
     // Listen to messages from the server
     socket.addEventListener(
