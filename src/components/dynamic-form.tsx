@@ -69,7 +69,7 @@ export default function DynamicForm({
     })
 
     const response = await api.post<CreatePollResponse>(
-      "http://localhost:3333/polls",
+      `${process.env.NEXT_PUBLIC_API_URL}/polls/`,
       {
         title,
         options: optionsArray,

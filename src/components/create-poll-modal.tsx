@@ -17,7 +17,6 @@ import { Input } from "./ui/input"
 import DynamicForm from "./dynamic-form"
 import { copyToClickboard } from "@/lib/copy-clipboard"
 import { toast } from "sonner"
-import { POLLS_BASE_URL } from "@/lib/axios"
 
 export default function CreatePollModal() {
   const [pollResponse, setPollResponse] = useState<CreatePollResponse>({
@@ -67,7 +66,7 @@ export default function CreatePollModal() {
               </Label>
               <Input
                 id="link"
-                value={POLLS_BASE_URL + pollResponse.pollId}
+                value={`${process.env.NEXT_PUBLIC_API_URL}/polls/${pollResponse.pollId}`}
                 readOnly
               />
             </div>
@@ -76,7 +75,9 @@ export default function CreatePollModal() {
               size="sm"
               className="px-3"
               onClick={() => {
-                copyToClickboard(POLLS_BASE_URL + pollResponse.pollId)
+                copyToClickboard(
+                  `${process.env.NEXT_PUBLIC_API_URL}/polls/${pollResponse.pollId}`
+                )
                 toast("Url copiada!")
               }}
             >
