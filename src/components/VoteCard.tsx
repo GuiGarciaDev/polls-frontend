@@ -40,7 +40,7 @@ export default function VoteCard({ poll }: VoteCardProps) {
 
   async function createVote(): Promise<{ message: string }> {
     return await api
-      .post(`http://localhost:3333/polls/${poll.id}/votes`, {
+      .post(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/polls/${poll.id}/votes`, {
         pollOptionId: getValues("values"),
       })
       .then(async (res) => {
