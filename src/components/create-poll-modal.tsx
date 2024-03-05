@@ -66,7 +66,7 @@ export default function CreatePollModal() {
               </Label>
               <Input
                 id="link"
-                value={`${process.env.NEXT_PUBLIC_API_URL}/polls/${pollResponse.pollId}`}
+                value={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/polls/${pollResponse.pollId}`}
                 readOnly
               />
             </div>
@@ -76,7 +76,7 @@ export default function CreatePollModal() {
               className="px-3"
               onClick={() => {
                 copyToClickboard(
-                  `${process.env.NEXT_PUBLIC_API_URL}/polls/${pollResponse.pollId}`
+                  `${process.env.NEXT_PUBLIC_FRONTEND_URL}/polls/${pollResponse.pollId}`
                 )
                 toast("Url copiada!")
               }}
