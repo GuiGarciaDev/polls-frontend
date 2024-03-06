@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "./ui/button"
 import { useState } from "react"
-import { Copy } from "lucide-react"
+import { Check, Copy } from "lucide-react"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import DynamicForm from "./dynamic-form"
@@ -23,6 +23,8 @@ export default function CreatePollModal() {
     success: false,
     pollId: "",
   })
+
+  const [copied, setCopied] = useState(false)
 
   function resetPollResponse() {
     setPollResponse({
@@ -79,10 +81,15 @@ export default function CreatePollModal() {
                   `${process.env.NEXT_PUBLIC_FRONTEND_URL}/polls/${pollResponse.pollId}`
                 )
                 toast("Url copiada!")
+                setCopied(true)
               }}
             >
+              {copied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
               <span className="sr-only">Copy</span>
-              <Copy className="h-4 w-4" />
             </Button>
           </div>
           <DialogFooter className="sm:justify-start">

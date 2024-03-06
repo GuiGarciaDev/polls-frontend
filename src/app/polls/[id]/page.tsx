@@ -1,5 +1,6 @@
 "use client"
 import VoteCard from "@/components/VoteCard"
+import Spinner from "@/components/spinner"
 import { queryClient } from "@/context/queryClientProvider"
 import { Poll } from "@/types/poll"
 import axios from "axios"
@@ -75,7 +76,9 @@ export default function Page() {
 
   return (
     <div className="flex justify-center items-center grow">
-      <span>LOADING...</span>
+      <span>
+        <Spinner fill="fill-primary" />
+      </span>
     </div>
   )
 }
