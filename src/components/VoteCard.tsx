@@ -51,11 +51,10 @@ export default function VoteCard({ poll }: VoteCardProps) {
 
   async function onSubmit() {
     if (!voted) {
-      setVoted(true)
-
       toast.promise(createVote, {
         loading: "Loading...",
         success: (data) => {
+          setVoted(true)
           return data.message
         },
         error: (data: AxiosError<{ message: string }>) => {

@@ -1,5 +1,6 @@
 "use client"
 import VoteCard from "@/components/VoteCard"
+import Spinner from "@/components/spinner"
 import { queryClient } from "@/context/queryClientProvider"
 import { Poll } from "@/types/poll"
 import axios from "axios"
@@ -32,38 +33,38 @@ export default function Page() {
     },
   })
 
-  useEffect(() => {
-    const socket = new WebSocket(
-      `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/polls/${id}/results`
-    )
+  // useEffect(() => {
+  //   const socket = new WebSocket(
+  //     `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/polls/${id}/results`
+  //   )
 
-    // Listen to messages from the server
-    socket.addEventListener(
-      "message",
-      async function (event: MessageEvent<WebsocketPollResponse>) {
-        // if (isSuccess) {
-        //   let newPollCache = data.poll // Initializing new instance of poll to mutate and update cache
-        //   let mutatedOptions = newPollCache.options
+  //   // Listen to messages from the server
+  //   socket.addEventListener(
+  //     "message",
+  //     async function (event: MessageEvent<WebsocketPollResponse>) {
+  //       // if (isSuccess) {
+  //       //   let newPollCache = data.poll // Initializing new instance of poll to mutate and update cache
+  //       //   let mutatedOptions = newPollCache.options
 
-        //   for (let i = 0; i < mutatedOptions.length; i++) {
-        //     if (mutatedOptions[i].id === event.data.pollOptionId) {
-        //       mutatedOptions[i].score = event.data.votes
-        //     }
-        //   }
+  //       //   for (let i = 0; i < mutatedOptions.length; i++) {
+  //       //     if (mutatedOptions[i].id === event.data.pollOptionId) {
+  //       //       mutatedOptions[i].score = event.data.votes
+  //       //     }
+  //       //   }
 
-        //   queryClient.setQueryData<Poll>(["poll"], newPollCache)
-        //   //setPollCache(queryClient.getQueryData<Poll>("poll")[0][1])
-        // }
+  //       //   queryClient.setQueryData<Poll>(["poll"], newPollCache)
+  //       //   //setPollCache(queryClient.getQueryData<Poll>("poll")[0][1])
+  //       // }
 
-        queryClient.refetchQueries(["poll"]) // Add a more efficient way to manipulate cache and prevent unecessary refetchs
-      }
-    )
+  //       queryClient.refetchQueries(["poll"]) // Add a more efficient way to manipulate cache and prevent unecessary refetchs
+  //     }
+  //   )
 
-    // Clean up function
-    return () => {
-      socket.close() // Close the WebSocket connection when the component unmounts
-    }
-  }, []) // Empty dependency array to run the effect only once when the component mounts
+  //   // Clean up function
+  //   return () => {
+  //     socket.close() // Close the WebSocket connection when the component unmounts
+  //   }
+  // }, []) // Empty dependency array to run the effect only once when the component mounts
 
   if (isSuccess) {
     return (
@@ -75,7 +76,9 @@ export default function Page() {
 
   return (
     <div className="flex justify-center items-center grow">
-      <span>LOADING...</span>
+      <span>
+        <Spinner fill="fill-primary" />
+      </span>
     </div>
   )
 }

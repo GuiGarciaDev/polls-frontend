@@ -14,6 +14,7 @@ import { Plus, X } from "lucide-react"
 import { toast } from "sonner"
 import { Option } from "@/types/types"
 import { api } from "@/lib/axios"
+import Spinner from "./spinner"
 
 interface DynamicFormProps extends React.ComponentProps<"form"> {
   changeState?: Dispatch<SetStateAction<CreatePollResponse>>
@@ -25,6 +26,7 @@ export default function DynamicForm({
 }: DynamicFormProps) {
   const [title, setTitle] = useState("")
   const [options, setOptions] = useState<Option[]>([])
+  const [loading, setLoading] = useState(false)
 
   function handleFormChange(
     index: number,
@@ -64,6 +66,8 @@ export default function DynamicForm({
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    setLoading(true) // Create poll loading state
+
     const optionsArray = options.map((option) => {
       return option.value
     })
@@ -80,9 +84,10 @@ export default function DynamicForm({
 
     if (data.success) {
       if (changeState) {
+        setLoading(false)
         changeState({ success: true, pollId: data.pollId })
       }
-      toast("Enquete criada com sucesso!")
+      toast.success("Enquete criada com sucesso!")
     }
   }
 
@@ -146,7 +151,10 @@ export default function DynamicForm({
         Adicionar opção <Plus fill="white" />
       </Button>
 
-      <Button type="submit">Criar enquete</Button>
+      <Button className="space-x-3" type="submit" disabled={loading}>
+        Criar enquete
+        {loading ? <Spinner fill="fill-white" /> : ""}
+      </Button>
     </form>
   )
 }
