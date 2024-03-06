@@ -97,7 +97,7 @@ Para rodar localmente você vai precisar do Docker para subir os bancos de dados
    
 4. Rode os containers do docker
    ```sh
-   docker compose
+   docker compose up
    ```
 
 5. Suba as migrations para o banco de dados
