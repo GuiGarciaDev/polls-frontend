@@ -87,7 +87,7 @@ export default function DynamicForm({
         setLoading(false)
         changeState({ success: true, pollId: data.pollId })
       }
-      toast("Enquete criada com sucesso!")
+      toast.success("Enquete criada com sucesso!")
     }
   }
 
@@ -151,7 +151,7 @@ export default function DynamicForm({
         Adicionar opção <Plus fill="white" />
       </Button>
 
-      <Button type="submit" disabled={loading}>
+      <Button className="space-x-3" type="submit" disabled={loading}>
         Criar enquete
         {loading ? <Spinner fill="fill-white" /> : ""}
       </Button>
