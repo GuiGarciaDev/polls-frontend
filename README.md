@@ -216,6 +216,6 @@ Vai responder uma mensagem de erro ou ok.
 
 Guilherme - [@GuiGarciaDev](https://twitter.com/GuiGarciaDev) - [GuiGarciaDev](https://linkedin.com/in/GuiGarciaDev) - guilherme.garcia1136@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/GuiGarciaDev/polls-frontend](https://github.com/GuiGarciaDev/polls-frontend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
