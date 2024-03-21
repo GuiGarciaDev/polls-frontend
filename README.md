@@ -1,6 +1,7 @@
 <a name="readme-top"></a>
 
 # Pollease
+</br>
 
 ![image](https://github.com/GuiGarciaDev/NLW-Expert-polls/assets/121461039/6976c999-256b-4e88-af86-04aa4476bcd5)
 
