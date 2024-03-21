@@ -190,8 +190,6 @@ Vai responder uma mensagem de erro ou ok.
 <!-- USAGE EXAMPLES -->
 ## Uso
 
-TEXTO PERSONALIZADO
-
 ### Crie enquetes
 
 ![image](https://github.com/GuiGarciaDev/NLW-Expert-polls/assets/121461039/799def54-b0d6-461b-85bc-7ac70799af63)
